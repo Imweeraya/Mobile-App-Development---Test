@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile_app_test/features/login/presentation/screens/home_screen.dart';
 import 'core/injection.dart';
 import 'features/login/presentation/screens/login_screen.dart';
+import 'features/task_board/presentation/screens/task_board_screen.dart';
 
 void main() {
   init(); // Initialize dependency injection
@@ -31,8 +31,8 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: '/home',
-      builder: (context, state) => const HomeScreen(),
+      path: '/task_board',
+      builder: (context, state) => const TaskBoardScreen(),
     ),
   ],
 );

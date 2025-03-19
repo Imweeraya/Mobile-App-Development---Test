@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mobile_app_test/features/task_board/data/datasource/remote/task_remote_data_source.dart';
+import 'package:mobile_app_test/features/task_board/data/datasource/remote/task_service.dart';
+import 'package:mobile_app_test/features/task_board/data/repositories/task_repository_implementation.dart';
+import 'package:mobile_app_test/features/task_board/domian/repositories/task_repository.dart';
 
 import '../features/login/data/datasource/remote/login_remote_data_source.dart';
 import '../features/login/data/datasource/remote/login_service.dart';
@@ -13,12 +17,17 @@ void init() {
 
   // Services
   serviceLocator.registerLazySingleton<LoginService>(() => LoginService(serviceLocator<Dio>()));
+  serviceLocator.registerLazySingleton<TaskService>(() => TaskService(serviceLocator<Dio>()));
 
   // Data Sources
   serviceLocator.registerLazySingleton<LoginRemoteDataSource>(
           () => LoginRemoteDataSourceImpl(service: serviceLocator<LoginService>()));
+  serviceLocator.registerLazySingleton<TaskRemoteDataSource>(
+          () => TaskRemoteDataSourceImpl(service: serviceLocator<TaskService>()));
 
   // Repositories
   serviceLocator.registerLazySingleton<LoginRepository>(
           () => LoginRepositoryImpl(remoteDataSource: serviceLocator<LoginRemoteDataSource>()));
+  serviceLocator.registerLazySingleton<TaskRepository>(
+          () => TaskRepositoryImpl(remoteDataSource: serviceLocator<TaskRemoteDataSource>()));
 }
