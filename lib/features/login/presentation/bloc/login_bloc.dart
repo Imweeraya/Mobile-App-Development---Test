@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
-import '../../domian/entities/user.dart';
-import '../../domian/usecase/login_use_case.dart';
+import '../../domain/entities/user.dart';
+import '../../domain/usecase/login_use_case.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 

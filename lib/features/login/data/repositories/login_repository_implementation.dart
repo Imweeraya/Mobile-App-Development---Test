@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
-import '../../domian/entities/user.dart';
-import '../../domian/repositories/login_repository.dart';
+import '../../domain/entities/user.dart';
+import '../../domain/repositories/login_repository.dart';
 import '../datasource/remote/login_remote_data_source.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:mobile_app_test/features/login/domian/repositories/login_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../entities/user.dart';
+import '../repositories/login_repository.dart';
 
 class LoginUseCase {
   final LoginRepository repository;

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domian/entities/user.dart';
+import '../../domain/entities/user.dart';
 
 abstract class LoginState extends Equatable {
   @override

@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
-import '../../domian/entities/task.dart';
-import '../../domian/repositories/task_repository.dart';
+
+import '../../domain/entities/task.dart';
+import '../../domain/repositories/task_repository.dart';
 import '../datasource/remote/task_remote_data_source.dart';
 import '../model/task_model.dart';
 
