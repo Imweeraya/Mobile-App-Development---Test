@@ -16,7 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.amber,
+          selectionColor:  Color.fromRGBO(254, 218, 104, 1),
+          selectionHandleColor: Colors.amber,
+        ),
       ),
       routerConfig: router,
     );
@@ -26,10 +31,7 @@ class MyApp extends StatelessWidget {
 final GoRouter router = GoRouter(
   initialLocation: '/login',
   routes: [
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
+    GoRoute(path: '/login', builder: (context, state) => LoginScreen()),
     GoRoute(
       path: '/task_board',
       builder: (context, state) => const TaskBoardScreen(),
