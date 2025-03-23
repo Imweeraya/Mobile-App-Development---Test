@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-
+import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
 
 import '../../domain/entities/task.dart';
@@ -15,7 +15,6 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<Either<Failure, List<TaskEntity>>> getTaskList() async {
-    print("HELLOOOOO");
     try {
       final List<TaskModel> taskModels = await remoteDataSource.getTaskList();
       final List<TaskEntity> taskEntities = taskModels.map((task) => TaskEntity(
@@ -26,8 +25,15 @@ class TaskRepositoryImpl implements TaskRepository {
         expertId: task.expertId,
       )).toList();
 
+
       return Right(taskEntities);
     } catch (e) {
+      if (e is ServerException) {
+        return Left(ServerFailure(
+          e.message,
+          statusCode: e.statusCode,
+        ));
+      }
       return Left(ServerFailure(e.toString()));
     }
   }

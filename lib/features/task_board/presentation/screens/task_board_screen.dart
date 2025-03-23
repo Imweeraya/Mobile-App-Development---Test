@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile_app_test/features/task_board/presentation/bloc/task_bloc.dart';
 import '../widgets/task_card.dart';
 
@@ -22,7 +23,19 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Home")),
       body: BlocConsumer<TaskBloc, TaskState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is TaskFailure) {
+            if (state.statusCode == 401 || state.statusCode == 403 || state.statusCode == 500) {
+            context.replace('/login');
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Session expired. Please log in again.'),
+                backgroundColor: Colors.black,
+              ),
+            );
+          }
+          }
+        },
         builder: (context, state) {
           return Column(
             children: [

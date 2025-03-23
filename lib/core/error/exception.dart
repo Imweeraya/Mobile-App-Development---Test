@@ -1,15 +1,19 @@
 class ServerException implements Exception {
   final String message;
-  ServerException(this.message);
+  final int? statusCode;
+
+  ServerException({required this.message ,this.statusCode});
 
   @override
-  String toString() => 'ServerException: $message';
+  String toString() => 'ServerException: $message (Status Code: $statusCode)';
 }
 
 class CacheException implements Exception {
   final String message;
-  CacheException(this.message);
+  final int? statusCode;
+
+  CacheException({required this.message, this.statusCode});
 
   @override
-  String toString() => 'CacheException: $message';
+  String toString() => 'CacheException: $message (Status Code: $statusCode)';
 }

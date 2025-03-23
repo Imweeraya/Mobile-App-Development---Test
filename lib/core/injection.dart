@@ -16,6 +16,7 @@ import '../features/login/data/datasource/remote/login_service.dart';
 import '../features/login/data/repositories/login_repository_implementation.dart';
 import '../features/login/domain/repositories/login_repository.dart';
 import '../features/login/domain/usecase/check_login_status_use_case.dart';
+import '../features/login/domain/usecase/clear_user_local_data_use_case.dart';
 import '../features/login/domain/usecase/login_use_case.dart';
 import '../features/login/presentation/bloc/login_bloc.dart';
 import '../features/task_board/domain/repositories/task_repository.dart';
@@ -100,10 +101,11 @@ Future<void> init() async {
   serviceLocator.registerFactory(() => GetTaskListUseCase(serviceLocator()));
   serviceLocator.registerFactory(() => CheckLoginStatusUseCase(serviceLocator()));
   serviceLocator.registerFactory(() => GetUserDataUseCase(serviceLocator()));
-
+  serviceLocator.registerFactory(() => ClearUserLocalDataUseCase(serviceLocator()));
+  
   //Bloc
   serviceLocator.registerFactory(
-    () => LoginBloc(loginUseCase: serviceLocator()),
+    () => LoginBloc(loginUseCase: serviceLocator(), clearUserLocalDataUseCase: serviceLocator()),
   );
   serviceLocator.registerFactory(() => TaskBloc(getTaskListUseCase: serviceLocator(), getUserDataUseCase: serviceLocator()));
 }

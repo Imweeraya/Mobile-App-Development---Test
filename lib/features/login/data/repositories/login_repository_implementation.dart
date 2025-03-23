@@ -31,6 +31,7 @@ class LoginRepositoryImpl implements LoginRepository {
     }
   }
 
+  @override
   Future<Either<Failure, User?>> getLastLoggedInUser() async {
     try {
       final localResult = await localDataSource.getLastLoggedInUser();
@@ -46,7 +47,7 @@ class LoginRepositoryImpl implements LoginRepository {
               refreshToken: userModel.refreshToken,
             ));
           }
-          return Right(null); // Return null if no user is cached
+          return Right(null);
         },
       );
     } catch (e) {

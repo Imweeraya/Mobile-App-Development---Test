@@ -27,8 +27,9 @@ class TaskLoaded extends TaskState {
 
 class TaskFailure extends TaskState {
   final String message;
+  final int? statusCode;
 
-  const TaskFailure({required this.message});
+  const TaskFailure({required this.message, this.statusCode});
 
   @override
   List<Object> get props => [message];

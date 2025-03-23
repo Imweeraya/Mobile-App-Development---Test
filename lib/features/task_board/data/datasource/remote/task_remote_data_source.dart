@@ -17,10 +17,10 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   @override
   Future<List<TaskModel>> getTaskList() async {
     try {
-      final response = await service.getTaskList();
+      var response = await service.getTaskList();
       return response.data;
     } on DioException catch (e) {
-      throw ServerException(e.response?.statusMessage ?? "Something went wrong");
+      throw ServerException(message: e.response?.statusMessage ?? "Something went wrong", statusCode: e.response?.statusCode);
     }
   }
 }

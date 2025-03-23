@@ -20,7 +20,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
       final response = await service.login({"email": email, "password": password});
       return response.data;
     } on DioException catch (e) {
-      throw ServerException(e.response?.statusMessage ?? "Something went wrong");
+      throw ServerException(message: e.response?.statusMessage ?? "Something went wrong");
     }
   }
 }

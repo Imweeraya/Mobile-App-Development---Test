@@ -13,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<LoginBloc>(context).add(ClearUser());
+    super.initState();
+  }
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
