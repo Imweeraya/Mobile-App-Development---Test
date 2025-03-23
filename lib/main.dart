@@ -53,11 +53,39 @@ class MyApp extends StatelessWidget {
 late GoRouter router = GoRouter(
   initialLocation: initialLocation,
   routes: [
-    GoRoute(path: '/login', builder: (context, state) => LoginScreen()),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => LoginScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          child: LoginScreen(),
+        );
+      },
+    ),
     GoRoute(
       path: '/task_board',
       builder: (context, state) => const TaskBoardScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1, 0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+          child: const TaskBoardScreen(),
+        );
+      },
     ),
+
   ],
 );
 }

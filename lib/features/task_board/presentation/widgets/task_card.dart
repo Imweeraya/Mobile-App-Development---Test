@@ -14,8 +14,8 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: Padding(
         padding: EdgeInsets.all(15),
         child: Column(
@@ -41,10 +41,10 @@ class TaskCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Color.fromRGBO(235, 235, 235, 1),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Text(status, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      child: Text(status.replaceAll('_', ' ') , style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color.fromRGBO(110, 110, 110, 1),)),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_app_test/features/task_board/presentation/bloc/task_bloc.dart';
+import 'package:mobile_app_test/features/task_board/presentation/widgets/user_profile_dialog.dart';
 import '../widgets/profile.dart';
 import '../widgets/task_card.dart';
 
@@ -19,18 +20,21 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
     super.initState();
   }
 
+  void logout() {
+    context.replace('/login');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Log Out'),
+        backgroundColor: Colors.black,
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(255, 249, 232, 1),
-      appBar: AppBar(backgroundColor: Colors.white, actions: [
-        IconButton(onPressed: (){}, icon:
-
-        Padding(
-          padding: const EdgeInsets.only(right: 24.0),
-          child: Icon(Icons.logout_rounded),
-        ))
-      ],),
       body: BlocConsumer<TaskBloc, TaskState>(
         listener: (context, state) {
           if (state is TaskFailure) {
@@ -51,36 +55,59 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
             Column(
             children: [
               Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(24),
+                    bottomRight: Radius.circular(24),
+                  ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      blurRadius: 5,
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      spreadRadius: 2,
                     ),
                   ],
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    SizedBox(height: 54,),
+                    Row(
                       children: [
-                        Text(
-                          "Hello",
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hello",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "${state.userData.firstName} ${state.userData.lastName}",
+                              style: TextStyle(fontSize: 16, color: Colors.grey),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "${state.userData.firstName} ${state.userData.lastName}",
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
+                        Spacer(),
+                        InkWell(
+                            onTap: (){
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return UserProfileDialog(
+                                    user: state.userData,
+                                    onLogout: logout,
+                                  );
+                                },
+                              );
+                            },
+                            child: Profile(firstLetter: state.userData.firstName[0],))
                       ],
                     ),
-                    Spacer(),
-                    Profile(firstLetter: state.userData.firstName[0],)
+                    SizedBox(height: 16,)
                   ],
                 ),
               ),
