@@ -3,8 +3,11 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failure.dart';
+import '../../../login/domain/entities/user.dart';
+import '../../../login/domain/usecase/check_login_status_use_case.dart';
 import '../../domain/entities/task.dart';
 import '../../domain/usecase/get_task_list_use_case.dart';
+import '../../domain/usecase/get_user_data_use_case.dart';
 
 
 part 'task_event.dart';
@@ -12,18 +15,21 @@ part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final GetTaskListUseCase getTaskListUseCase;
+  final GetUserDataUseCase getUserDataUseCase;
 
-  TaskBloc(this.getTaskListUseCase) : super(TaskInitial()) {
+
+  TaskBloc({required this.getTaskListUseCase, required this.getUserDataUseCase}) : super(TaskInitial()) {
     on<GetTaskList>(_onGetTaskList);
   }
 
   Future<void> _onGetTaskList(GetTaskList event, Emitter<TaskState> emit) async {
-    print("HELLOOOOO4");
     emit(TaskLoading());
 
-    final Either<Failure, List<TaskEntity>> result = await getTaskListUseCase();
+    final Either<Failure, List<TaskEntity>> taskList = await getTaskListUseCase();
+    // final Either<Failure, User> result = await getUserDataUseCase();
 
-    result.fold(
+
+    taskList.fold(
           (failure) => emit(TaskFailure(message: failure.message)),
           (taskList) => emit(TaskLoaded(taskList: taskList)),
     );

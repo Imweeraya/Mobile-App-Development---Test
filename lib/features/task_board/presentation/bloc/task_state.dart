@@ -17,6 +17,7 @@ class TaskLoading extends TaskState {
 
 class TaskLoaded extends TaskState {
   final List<TaskEntity> taskList;
+  // final User useData;
 
   const TaskLoaded({required this.taskList});
 

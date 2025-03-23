@@ -15,9 +15,11 @@ import '../features/login/data/datasource/remote/login_remote_data_source.dart';
 import '../features/login/data/datasource/remote/login_service.dart';
 import '../features/login/data/repositories/login_repository_implementation.dart';
 import '../features/login/domain/repositories/login_repository.dart';
+import '../features/login/domain/usecase/check_login_status_use_case.dart';
 import '../features/login/domain/usecase/login_use_case.dart';
 import '../features/login/presentation/bloc/login_bloc.dart';
 import '../features/task_board/domain/repositories/task_repository.dart';
+import '../features/task_board/domain/usecase/get_user_data_use_case.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -96,10 +98,12 @@ Future<void> init() async {
   //UseCase
   serviceLocator.registerFactory(() => LoginUseCase(serviceLocator()));
   serviceLocator.registerFactory(() => GetTaskListUseCase(serviceLocator()));
+  serviceLocator.registerFactory(() => CheckLoginStatusUseCase(serviceLocator()));
+  serviceLocator.registerFactory(() => GetUserDataUseCase(serviceLocator()));
 
   //Bloc
   serviceLocator.registerFactory(
     () => LoginBloc(loginUseCase: serviceLocator()),
   );
-  serviceLocator.registerFactory(() => TaskBloc(serviceLocator()));
+  serviceLocator.registerFactory(() => TaskBloc(getTaskListUseCase: serviceLocator(), getUserDataUseCase: serviceLocator()));
 }

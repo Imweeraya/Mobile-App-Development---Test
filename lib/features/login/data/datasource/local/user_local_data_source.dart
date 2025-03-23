@@ -1,12 +1,14 @@
 
 import 'dart:convert';
+import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../core/error/failure.dart';
 import '../../model/user_model.dart';
 
 abstract class UserLocalDataSource {
   Future<void> cacheUser(UserModel user);
-  Future<UserModel?> getLastLoggedInUser();
+  Future<Either<Failure, UserModel?>> getLastLoggedInUser();
   Future<void> clearUser();
 }
 
@@ -25,13 +27,18 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<UserModel?> getLastLoggedInUser() {
-    final jsonString = sharedPreferences.getString(CACHED_USER_KEY);
-    if (jsonString != null) {
-      return Future.value(UserModel.fromJson(jsonDecode(jsonString)));
+  Future<Either<Failure, UserModel?>> getLastLoggedInUser() async {
+    try {
+      final jsonString = sharedPreferences.getString(CACHED_USER_KEY);
+      if (jsonString != null) {
+        return Right(UserModel.fromJson(jsonDecode(jsonString)));
+      }
+      return Right(null);
+    } catch (e) {
+      return Left(CacheFailure(e.toString()));
     }
-    return Future.value(null);
   }
+
 
   @override
   Future<void> clearUser() async {

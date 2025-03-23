@@ -28,7 +28,6 @@ class TaskRepositoryImpl implements TaskRepository {
 
       return Right(taskEntities);
     } catch (e) {
-      print("HELLOOOOO2 ${e.toString()}");
       return Left(ServerFailure(e.toString()));
     }
   }

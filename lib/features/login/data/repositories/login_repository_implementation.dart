@@ -30,4 +30,27 @@ class LoginRepositoryImpl implements LoginRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  Future<Either<Failure, User?>> getLastLoggedInUser() async {
+    try {
+      final localResult = await localDataSource.getLastLoggedInUser();
+      return localResult.fold(
+            (failure) => Left(failure),
+            (userModel) {
+          if (userModel != null) {
+            return Right(User(
+              id: userModel.id,
+              email: userModel.email,
+              firstName: userModel.firstName,
+              lastName: userModel.lastName,
+              refreshToken: userModel.refreshToken,
+            ));
+          }
+          return Right(null); // Return null if no user is cached
+        },
+      );
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }
