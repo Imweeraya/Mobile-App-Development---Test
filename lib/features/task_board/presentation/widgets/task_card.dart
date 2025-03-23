@@ -13,6 +13,7 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shadowColor: Colors.white.withOpacity(0),
       color: Colors.white,
       margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),

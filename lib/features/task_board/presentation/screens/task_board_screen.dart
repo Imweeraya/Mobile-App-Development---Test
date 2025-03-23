@@ -34,7 +34,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 249, 232, 1),
+      backgroundColor: Color.fromRGBO(255, 247, 216, 1.0),
       body: BlocConsumer<TaskBloc, TaskState>(
         listener: (context, state) {
           if (state is TaskFailure) {
@@ -62,13 +62,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
                     bottomLeft: Radius.circular(24),
                     bottomRight: Radius.circular(24),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                    ),
-                  ],
+
                 ),
                 child: Column(
                   children: [
@@ -129,7 +123,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
                   : const SizedBox.shrink(),
             ],
           ) :
-          Center(child: CircularProgressIndicator(),);
+          Center(child: CircularProgressIndicator(color: Colors.black,),);
         },
       ),
     );
