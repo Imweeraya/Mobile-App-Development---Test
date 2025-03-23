@@ -18,6 +18,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> _onGetTaskList(GetTaskList event, Emitter<TaskState> emit) async {
+    print("HELLOOOOO4");
     emit(TaskLoading());
 
     final Either<Failure, List<TaskEntity>> result = await getTaskListUseCase();

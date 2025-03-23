@@ -15,6 +15,7 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<Either<Failure, List<TaskEntity>>> getTaskList() async {
+    print("HELLOOOOO");
     try {
       final List<TaskModel> taskModels = await remoteDataSource.getTaskList();
       final List<TaskEntity> taskEntities = taskModels.map((task) => TaskEntity(
@@ -27,6 +28,7 @@ class TaskRepositoryImpl implements TaskRepository {
 
       return Right(taskEntities);
     } catch (e) {
+      print("HELLOOOOO2 ${e.toString()}");
       return Left(ServerFailure(e.toString()));
     }
   }

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'core/injection.dart';
+import 'features/login/presentation/bloc/login_bloc.dart';
 import 'features/login/presentation/screens/login_screen.dart';
+import 'features/task_board/presentation/bloc/task_bloc.dart';
 import 'features/task_board/presentation/screens/task_board_screen.dart';
 
-void main() {
-  init(); // Initialize dependency injection
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => serviceLocator<LoginBloc>()),
+        BlocProvider(create: (context) => serviceLocator<TaskBloc>()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("HELLOOOOO6");
     return MaterialApp.router(
       theme: ThemeData(
         primarySwatch: Colors.amber,
