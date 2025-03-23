@@ -23,8 +23,9 @@ class TaskCard extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Flexible(child: Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
                 _buildStatusLabel(status),
               ],
             ),

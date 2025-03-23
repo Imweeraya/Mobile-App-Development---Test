@@ -35,7 +35,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         TaskFailure(message: failure.message, statusCode: failure.statusCode),
       ),
           (taskList) {
-        result.fold(
+                  result.fold(
               (failure) => emit(
             TaskFailure(message: failure.message, statusCode: failure.statusCode),
           ),
@@ -43,5 +43,4 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         );
       },
     );
-  }
-}
+  }}
