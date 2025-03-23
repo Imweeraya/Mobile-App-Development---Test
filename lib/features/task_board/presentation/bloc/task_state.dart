@@ -17,9 +17,9 @@ class TaskLoading extends TaskState {
 
 class TaskLoaded extends TaskState {
   final List<TaskEntity> taskList;
-  // final User useData;
+  final User userData;
 
-  const TaskLoaded({required this.taskList});
+  const TaskLoaded({required this.taskList, required this.userData});
 
   @override
   List<Object> get props => [taskList];

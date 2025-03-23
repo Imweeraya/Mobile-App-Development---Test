@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_app_test/features/task_board/presentation/bloc/task_bloc.dart';
+import '../widgets/profile.dart';
 import '../widgets/task_card.dart';
 
 class TaskBoardScreen extends StatefulWidget {
@@ -21,7 +22,15 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
+      backgroundColor: Color.fromRGBO(255, 249, 232, 1),
+      appBar: AppBar(backgroundColor: Colors.white, actions: [
+        IconButton(onPressed: (){}, icon:
+
+        Padding(
+          padding: const EdgeInsets.only(right: 24.0),
+          child: Icon(Icons.logout_rounded),
+        ))
+      ],),
       body: BlocConsumer<TaskBloc, TaskState>(
         listener: (context, state) {
           if (state is TaskFailure) {
@@ -37,7 +46,9 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
           }
         },
         builder: (context, state) {
-          return Column(
+          return
+            state is TaskLoaded ?
+            Column(
             children: [
               Container(
                 padding: EdgeInsets.all(20),
@@ -63,17 +74,17 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
                           ),
                         ),
                         Text(
-                          "Firstname Lastname",
+                          "${state.userData.firstName} ${state.userData.lastName}",
                           style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                       ],
                     ),
                     Spacer(),
-                    CircleAvatar(radius: 25, backgroundColor: Colors.grey),
+                    Profile(firstLetter: state.userData.firstName[0],)
                   ],
                 ),
               ),
-              state is TaskLoaded && state.taskList.isNotEmpty
+              state.taskList.isNotEmpty
                   ? Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.symmetric(vertical: 10),
@@ -90,7 +101,8 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
                   )
                   : const SizedBox.shrink(),
             ],
-          );
+          ) :
+          Center(child: CircularProgressIndicator(),);
         },
       ),
     );
