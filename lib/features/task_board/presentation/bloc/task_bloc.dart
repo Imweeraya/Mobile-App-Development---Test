@@ -35,8 +35,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         TaskFailure(message: failure.message, statusCode: failure.statusCode),
       ),
           (taskList) {
-            taskList.add(TaskEntity(name: "Task 4.", status: "in_progress", description: "That means you can't use the result of this method call in an expression.That means you can't use the result of this method call in an expression.", goal: "API; there might be a function or call that returns void you didn't expect. Also check type parameters and variables which might also be void", expertId: 1));
-
             result.fold(
               (failure) => emit(
             TaskFailure(message: failure.message, statusCode: failure.statusCode),
