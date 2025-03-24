@@ -38,7 +38,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ClearUser event,
       Emitter<LoginState> emit,
       ) async {
-    emit(LoginLoading());
     clearUserLocalDataUseCase.clearUserLocalData();
   }
 }
