@@ -34,7 +34,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 247, 216, 1.0),
+      backgroundColor: Color.fromRGBO(237, 237, 237, 1.0),
       body: BlocConsumer<TaskBloc, TaskState>(
         listener: (context, state) {
           if (state is TaskFailure) {
@@ -111,7 +111,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       itemCount: state.taskList.length,
                       itemBuilder: (context, index) {
-                        return TaskCard(
+                        return ExpandableCard(
                           title: state.taskList[index].name,
                           description: state.taskList[index].description,
                           goal: state.taskList[index].goal,
