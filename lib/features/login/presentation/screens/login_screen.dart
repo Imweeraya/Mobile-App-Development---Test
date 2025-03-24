@@ -230,6 +230,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
+                state is LoginLoading ?
+                LinearProgressIndicator(
+                  backgroundColor: Color.fromRGBO(254, 218, 104, 1),
+                  color: Colors.black,
+                ) : const SizedBox.shrink()
               ],
             ),
           );

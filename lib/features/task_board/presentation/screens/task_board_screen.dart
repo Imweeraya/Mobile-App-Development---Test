@@ -21,6 +21,7 @@ class _TaskBoardScreenState extends State<TaskBoardScreen> {
   }
 
   void logout() {
+    Navigator.of(context).pop();
     context.replace('/login');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
