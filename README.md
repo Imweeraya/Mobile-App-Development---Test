@@ -1,16 +1,30 @@
-# mobile_app_test
+# Flutter Mobile App Test
 
-A new Flutter project.
+This is a simple Flutter app that allows users to log in and view their tasks by interacting with the provided API. The app includes two main screens: a **Login Screen** and a **Task Board Screen**.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Login Screen**: Allows the user to log in with their email and password using the provided API.
+- **Task Display Screen**: After successful login, displays the user's tasks in a list format.
+- **Session Expiry Handling**: If the session expires, the app will automatically redirect the user to the login screen.
+- **Log Out**: on the task board screen user can log out by clicking on their profile to see their details and pressing the log out button.
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Dart](https://dart.dev/get-dart)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+1. **Clone the repository**:
+    git clone https://github.com/Imweeraya/Mobile-App-Development---Test.git
+2. **Install dependencies**:
+    flutter pub get
+
+## Usage
+
+1. **Open the project in your preferred IDE (e.g., Visual Studio Code or Android Studio).**
+2. **Make sure the emulator is running or a physical device is connected.**
+3. **Run the app**:
+   flutter run
+
