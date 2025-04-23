@@ -228,6 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 16),
                   ],
                 ),
                 state is LoginLoading ?
